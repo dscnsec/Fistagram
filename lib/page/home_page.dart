@@ -11,6 +11,18 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+  List<String> instaStories= [
+    "assets/img/insta_stories/01.png" ,
+    "assets/img/insta_stories/02.png" ,
+    "assets/img/insta_stories/03.png" ,
+    "assets/img/insta_stories/04.png" ,
+    "assets/img/insta_stories/01.png" ,
+    "assets/img/insta_stories/02.png" ,
+    "assets/img/insta_stories/03.png" ,
+    "assets/img/insta_stories/04.png" ,
+  ] ;
+
   @override
   Widget build(BuildContext context) {
     final width= MediaQuery.of(context).size.width;
@@ -46,7 +58,45 @@ class _HomePageState extends State<HomePage> {
           ],
           elevation: 0,
         ),
-        
+        body: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: Column(
+            children: [
+              const SizedBox(height: 10,),
+              SizedBox(
+                height: 60,
+                child: ListView(
+                  scrollDirection: Axis.horizontal, 
+                  physics: const BouncingScrollPhysics(),
+                  children: [
+                    //--------------------Upload status button-------------------------
+                    CircleAvatar( 
+                      backgroundColor: secondaryBackgroundColor,
+                      radius: 30, 
+                      child: IconButton(
+                        padding: EdgeInsets.zero,
+                        icon: Image.asset("assets/img/insta_stories/00.png", ), 
+                        onPressed: () {  }, iconSize: 30,) 
+                      ),
+                    //---------------------Stories Icon Builder------------------
+                    ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      itemCount: instaStories.length,
+                      itemBuilder: (BuildContext context, int index){
+                        return Row(
+                          children: [
+                            const SizedBox( width: 15),
+                            CircleAvatar(child: Image.asset(instaStories[index]), radius:30)
+                          ],
+                        );
+                      }),
+
+                ]),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
