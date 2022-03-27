@@ -13,8 +13,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    final width= MediaQuery.of(context).size.width;
+
     return Container(
-      padding: EdgeInsets.fromLTRB(25, 0, 25, 0),
+      padding: EdgeInsets.fromLTRB(width*0.09, 0, width*0.09, 0),
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
       child: Scaffold(
@@ -44,7 +46,7 @@ class _HomePageState extends State<HomePage> {
           ],
           elevation: 0,
         ),
-       
+        
       ),
     );
   }
