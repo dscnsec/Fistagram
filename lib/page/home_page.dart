@@ -1,5 +1,6 @@
 import 'package:fistagram/custom_icons_icons.dart';
 import 'package:fistagram/page/search_page.dart';
+import 'package:fistagram/widgets/post_box.dart';
 import 'package:flutter/material.dart';
 import 'package:fistagram/utils/colors.dart';
 
@@ -11,7 +12,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
+  //demo data
   List<String> instaStories= [
     "assets/img/insta_stories/01.png" ,
     "assets/img/insta_stories/02.png" ,
@@ -22,6 +23,14 @@ class _HomePageState extends State<HomePage> {
     "assets/img/insta_stories/03.png" ,
     "assets/img/insta_stories/04.png" ,
   ] ;
+  //demo Data
+  List<String> postPics= [
+    "assets/img/post/01.jpg",
+    "assets/img/post/02.jpg",
+    "assets/img/post/03.jpg",
+    "assets/img/post/04.jpg",
+    "assets/img/post/05.jpg",
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -94,6 +103,23 @@ class _HomePageState extends State<HomePage> {
 
                 ]),
               ),
+              //-----------------------------Post Feed---------------------------
+              SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                child: Column(
+                  children: [
+                      const SizedBox( height: 20,),
+                      ListView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: postPics.length, 
+                        itemBuilder: (BuildContext context, int index){
+                          return PostBox(userId: 'spxd_insta',imagePath: postPics[index], likes:2, numberOfComments: 1,);
+                        }),
+                      const SizedBox( height: 80,),
+                  ],
+                ),
+              )
             ],
           ),
         ),
