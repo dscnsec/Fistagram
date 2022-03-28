@@ -37,7 +37,7 @@ class _HomePageState extends State<HomePage> {
     final width= MediaQuery.of(context).size.width;
 
     return Container(
-      padding: EdgeInsets.fromLTRB(width*0.09, 0, width*0.09, 0),
+      padding: EdgeInsets.fromLTRB(width*0.08, 0, width*0.08, 0),
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
       child: Scaffold(
