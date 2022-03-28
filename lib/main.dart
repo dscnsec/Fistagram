@@ -63,6 +63,7 @@ class _MainPageState extends State<MainPage> {
     ];
 
     return Scaffold(
+      extendBody: true,
       backgroundColor: const Color.fromARGB(255, 239, 243, 245),
       body: screens[_page],
       bottomNavigationBar: Theme(
