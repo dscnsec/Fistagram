@@ -27,6 +27,7 @@ class _NotificationPageState extends State<NotificationPage> {
        elevation: 0,
      ),
      body: SingleChildScrollView(
+       physics: BouncingScrollPhysics(),
         child: SafeArea(
           child: Container(
           padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
