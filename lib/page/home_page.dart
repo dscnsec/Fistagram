@@ -79,14 +79,15 @@ class _HomePageState extends State<HomePage> {
                   scrollDirection: Axis.horizontal, 
                   physics: const BouncingScrollPhysics(),
                   children: [
+                    const SizedBox( width: 6),
                     //--------------------Upload status button-------------------------
                     CircleAvatar( 
                       backgroundColor: secondaryBackgroundColor,
-                      radius: 30, 
+                      radius: 28, 
                       child: IconButton(
                         padding: EdgeInsets.zero,
                         icon: Image.asset("assets/img/insta_stories/00.png", ), 
-                        onPressed: () {  }, iconSize: 30,) 
+                        onPressed: () {  }, iconSize: 28,) 
                       ),
                     //---------------------Stories Icon Builder------------------
                     ListView.builder(
@@ -97,7 +98,7 @@ class _HomePageState extends State<HomePage> {
                         return Row(
                           children: [
                             const SizedBox( width: 15),
-                            CircleAvatar(child: Image.asset(instaStories[index]), radius:30)
+                            CircleAvatar(child: Image.asset(instaStories[index]), radius:28)
                           ],
                         );
                       }),
