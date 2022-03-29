@@ -45,6 +45,7 @@ class _HomePageState extends State<HomePage> {
         appBar: AppBar(
           backgroundColor: backgroundColor,
           centerTitle: true,
+          leadingWidth: 30,
           leading: IconButton(
             onPressed: (){
               Navigator.push(context, MaterialPageRoute(builder: (context)=> SearchPage()));
