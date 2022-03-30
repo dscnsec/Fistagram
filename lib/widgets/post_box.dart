@@ -37,7 +37,7 @@ class _PostBoxState extends State<PostBox> {
           Container(
             child: Row(
               children: [
-                const SizedBox(width: 4,),
+                const SizedBox(width: 6,),
                 CircleAvatar(
                   radius: 13,
                   child: Image.asset("assets/img/profile_pic.png"),
@@ -95,7 +95,7 @@ class _PostBoxState extends State<PostBox> {
           Container(
             child: Row(
               children: [
-                const SizedBox( width: 3,),
+                const SizedBox( width: 5,),
                 SizedBox(
                   width: 25,
                   child: IconButton(
