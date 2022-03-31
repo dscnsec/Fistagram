@@ -74,7 +74,7 @@ class _MainPageState extends State<MainPage> {
           animationCurve: Curves.easeInOut,
           animationDuration: const Duration(milliseconds: 300),
           backgroundColor: Colors.transparent,
-          color: Color.fromARGB(235, 246, 252, 255),
+          color: Color.fromARGB(255, 246, 252, 255),
           height: 65,
           items: items,
           index: 0,
