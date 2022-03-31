@@ -53,7 +53,7 @@ class _NotificationBoxState extends State<NotificationBox> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 50,
+      height: 60,
       child: Row(
         children: [
           CircleAvatar(
