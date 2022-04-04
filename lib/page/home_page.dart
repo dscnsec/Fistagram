@@ -86,7 +86,9 @@ class _HomePageState extends State<HomePage> {
                       radius: 28, 
                       child: IconButton(
                         padding: EdgeInsets.zero,
-                        icon: Image.asset("assets/img/insta_stories/00.png", ), 
+                        icon: const Icon(CustomIcons.akar_icons_plus, 
+                          size: 32, 
+                          color: primaryColor,), 
                         onPressed: () {  }, iconSize: 28,) 
                       ),
                     //---------------------Stories Icon Builder------------------
