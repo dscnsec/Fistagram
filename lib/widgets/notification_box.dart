@@ -1,6 +1,7 @@
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:fistagram/utils/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:fistagram/widgets/follow_button.dart';
 
 class NotificationBox extends StatefulWidget {
   final String profilePicPath;
@@ -24,31 +25,6 @@ class NotificationBox extends StatefulWidget {
 }
 
 class _NotificationBoxState extends State<NotificationBox> {
-
-  Widget followButton(){
-    return TextButton(
-      onPressed: (){},
-      style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 65, 184, 244)),
-        fixedSize: MaterialStateProperty.all(const Size(50, 20)),
-        minimumSize: MaterialStateProperty.all(const Size(70, 30)),
-        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-          RoundedRectangleBorder(
-            borderRadius: SmoothBorderRadius(
-              cornerRadius: 5,
-              cornerSmoothing: 1
-          )
-          ) 
-        )),
-      child: const Text('Follow', 
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 14,
-          fontWeight: FontWeight.w400
-        )
-        )
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -102,7 +78,7 @@ class _NotificationBoxState extends State<NotificationBox> {
             ),
           ),
           if(widget.isFollow)
-            followButton()
+            FollowButton()
           else
              ClipSmoothRect(
                radius: SmoothBorderRadius(
