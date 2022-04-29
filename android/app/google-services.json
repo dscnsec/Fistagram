@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "914084547315",
+    "project_id": "fistagram-spxd",
+    "storage_bucket": "fistagram-spxd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:914084547315:android:0a3e77186e53e5c2d8c586",
+        "android_client_info": {
+          "package_name": "com.example.fistagram"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "914084547315-t7v1qpo8gbmtkc4l68kv9eib4pk64apg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC98UQD775dxt46RRYeSrImcfvR8eAzeTI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "914084547315-t7v1qpo8gbmtkc4l68kv9eib4pk64apg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
