@@ -7,14 +7,15 @@ class TextFieldInput extends StatelessWidget{
   final bool isObscure;
   final String hintText;
   final TextInputType textInputType;
-  const TextFieldInput({Key? key, required this.textEditingController, this.isObscure=false, required this.hintText, required this.textInputType});
+  final IconData iconType;
+  const TextFieldInput({Key? key, required this.textEditingController, required this.iconType , this.isObscure=false, required this.hintText, required this.textInputType});
 
   @override
   Widget build(BuildContext context) {
     final inputBorder = OutlineInputBorder(
       borderSide: BorderSide.none,
       borderRadius:  SmoothBorderRadius(
-              cornerRadius: 12,
+              cornerRadius: 6,
               cornerSmoothing: 1,
             ),
     );
@@ -22,6 +23,7 @@ class TextFieldInput extends StatelessWidget{
     return TextField(
       controller: textEditingController,
       decoration: InputDecoration(
+        prefixIcon: Icon( iconType, color: primaryColor),
         hintText: hintText,
         hintStyle: const TextStyle(
           fontWeight: FontWeight.w300,
