@@ -1,4 +1,5 @@
 import 'package:figma_squircle/figma_squircle.dart';
+import 'package:fistagram/utils/colors.dart';
 import 'package:flutter/material.dart';
 
 
@@ -16,7 +17,7 @@ class _FollowButtonState extends State<FollowButton> {
     return TextButton(
       onPressed: (){},
       style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 65, 184, 244)),
+        backgroundColor: MaterialStateProperty.all(primaryButtonColor),
         fixedSize: MaterialStateProperty.all(const Size(50, 20)),
         minimumSize: MaterialStateProperty.all(const Size(70, 30)),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
