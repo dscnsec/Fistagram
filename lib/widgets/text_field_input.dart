@@ -1,3 +1,4 @@
+import 'package:figma_squircle/figma_squircle.dart';
 import 'package:fistagram/utils/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -11,20 +12,25 @@ class TextFieldInput extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
     final inputBorder = OutlineInputBorder(
-      borderRadius: const BorderRadius.all(Radius.circular(4))
+      borderSide: BorderSide.none,
+      borderRadius:  SmoothBorderRadius(
+              cornerRadius: 12,
+              cornerSmoothing: 1,
+            ),
     );
 
     return TextField(
       controller: textEditingController,
       decoration: InputDecoration(
         hintText: hintText,
-        // hintStyle: const TextStyle(
-        //   color: primaryColor
-        // ),
+        hintStyle: const TextStyle(
+          fontWeight: FontWeight.w300,
+           color:  primaryColor
+        ),
         border: inputBorder,
         focusedBorder: inputBorder,
         filled: true,
-        fillColor: secondaryBackgroundColor,
+        fillColor: primaryInputBoxColor,
         contentPadding: const EdgeInsets.all(8)
       ),
       keyboardType: textInputType,
