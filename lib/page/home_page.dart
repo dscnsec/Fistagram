@@ -13,18 +13,18 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   //demo data
-  List<String> instaStories= [
-    "assets/img/insta_stories/01.png" ,
-    "assets/img/insta_stories/02.png" ,
-    "assets/img/insta_stories/03.png" ,
-    "assets/img/insta_stories/04.png" ,
-    "assets/img/insta_stories/01.png" ,
-    "assets/img/insta_stories/02.png" ,
-    "assets/img/insta_stories/03.png" ,
-    "assets/img/insta_stories/04.png" ,
-  ] ;
+  List<String> instaStories = [
+    "assets/img/insta_stories/01.png",
+    "assets/img/insta_stories/02.png",
+    "assets/img/insta_stories/03.png",
+    "assets/img/insta_stories/04.png",
+    "assets/img/insta_stories/01.png",
+    "assets/img/insta_stories/02.png",
+    "assets/img/insta_stories/03.png",
+    "assets/img/insta_stories/04.png",
+  ];
   //demo Data
-  List<String> postPics= [
+  List<String> postPics = [
     "assets/img/post/01.jpg",
     "assets/img/post/02.jpg",
     "assets/img/post/03.jpg",
@@ -34,10 +34,10 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final width= MediaQuery.of(context).size.width;
+    final width = MediaQuery.of(context).size.width;
 
     return Container(
-      padding: EdgeInsets.fromLTRB(width*0.08, 0, width*0.08, 0),
+      padding: EdgeInsets.fromLTRB(width * 0.08, 0, width * 0.08, 0),
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
       child: Scaffold(
@@ -47,24 +47,23 @@ class _HomePageState extends State<HomePage> {
           centerTitle: true,
           leadingWidth: 30,
           leading: IconButton(
-            onPressed: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context)=> SearchPage()));
-            },
-            icon: Icon(CustomIcons.clarity_search_line, size: 30, color: primaryColor)),
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => SearchPage()));
+              },
+              icon: Icon(CustomIcons.clarity_search_line,
+                  size: 30, color: primaryColor)),
           title: const Text(
             'Fistagram',
-            style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.w300
-            ),
-            ),
+            style: TextStyle(color: Colors.black, fontWeight: FontWeight.w300),
+          ),
           actions: [
             IconButton(
-              onPressed: (){}, 
-              icon: CircleAvatar(
-                child: Image.asset("assets/img/profile_pic.png"),
-                radius: 30,
-              ))
+                onPressed: () {},
+                icon: CircleAvatar(
+                  child: Image.asset("assets/img/profile_pic.png"),
+                  radius: 30,
+                ))
           ],
           elevation: 0,
         ),
@@ -72,55 +71,70 @@ class _HomePageState extends State<HomePage> {
           physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
-              const SizedBox(height: 10,),
+              const SizedBox(
+                height: 10,
+              ),
               SizedBox(
                 height: 60,
                 child: ListView(
-                  scrollDirection: Axis.horizontal, 
-                  physics: const BouncingScrollPhysics(),
-                  children: [
-                    const SizedBox( width: 6),
-                    //--------------------Upload status button-------------------------
-                    CircleAvatar( 
-                      backgroundColor: secondaryBackgroundColor,
-                      radius: 28, 
-                      child: IconButton(
-                        padding: EdgeInsets.zero,
-                        icon: const Icon(CustomIcons.akar_icons_plus, 
-                          size: 32, 
-                          color: primaryColor,), 
-                        onPressed: () {  }, iconSize: 28,) 
-                      ),
-                    //---------------------Stories Icon Builder------------------
-                    ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      shrinkWrap: true,
-                      itemCount: instaStories.length,
-                      itemBuilder: (BuildContext context, int index){
-                        return Row(
-                          children: [
-                            const SizedBox( width: 15),
-                            CircleAvatar(child: Image.asset(instaStories[index]), radius:28)
-                          ],
-                        );
-                      }),
-
-                ]),
+                    scrollDirection: Axis.horizontal,
+                    physics: const BouncingScrollPhysics(),
+                    children: [
+                      const SizedBox(width: 6),
+                      //--------------------Upload status button-------------------------
+                      CircleAvatar(
+                          backgroundColor: secondaryBackgroundColor,
+                          radius: 28,
+                          child: IconButton(
+                            padding: EdgeInsets.zero,
+                            icon: const Icon(
+                              CustomIcons.akar_icons_plus,
+                              size: 32,
+                              color: primaryColor,
+                            ),
+                            onPressed: () {},
+                            iconSize: 28,
+                          )),
+                      //---------------------Stories Icon Builder------------------
+                      ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          shrinkWrap: true,
+                          itemCount: instaStories.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            return Row(
+                              children: [
+                                const SizedBox(width: 15),
+                                CircleAvatar(
+                                    child: Image.asset(instaStories[index]),
+                                    radius: 28)
+                              ],
+                            );
+                          }),
+                    ]),
               ),
               //-----------------------------Post Feed---------------------------
               SingleChildScrollView(
                 physics: const BouncingScrollPhysics(),
                 child: Column(
                   children: [
-                      const SizedBox( height: 20,),
-                      ListView.builder(
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    ListView.builder(
                         physics: const NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
-                        itemCount: postPics.length, 
-                        itemBuilder: (BuildContext context, int index){
-                          return PostBox(userId: 'spxd_insta',imagePath: postPics[index], likes:2, numberOfComments: 1,);
+                        itemCount: postPics.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return PostBox(
+                            userId: 'spxd_insta',
+                            imagePath: postPics[index],
+                            likes: 2,
+                            numberOfComments: 1,
+                          );
                         }),
-                      const SizedBox( height: 80,),
+                    const SizedBox(
+                      height: 80,
+                    ),
                   ],
                 ),
               )

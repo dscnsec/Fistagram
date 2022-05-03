@@ -11,13 +11,13 @@ class NotificationBox extends StatefulWidget {
   final bool isFollow;
   final String postPic;
   const NotificationBox({
-    Key? key, 
-    required this.profilePicPath, 
-    required this.userId, 
-    required this.notificationMessage, 
+    Key? key,
+    required this.profilePicPath,
+    required this.userId,
+    required this.notificationMessage,
     required this.timePassed,
     required this.isFollow,
-    this.postPic="",
+    this.postPic = "",
   }) : super(key: key);
 
   @override
@@ -25,77 +25,64 @@ class NotificationBox extends StatefulWidget {
 }
 
 class _NotificationBoxState extends State<NotificationBox> {
-
   @override
   Widget build(BuildContext context) {
     return Container(
       height: 60,
-      child: Row(
-        children: [
-          CircleAvatar(
-            radius: 20,
-            child: ClipOval(child: Image.asset(widget.profilePicPath)) ,
-            backgroundColor: Colors.transparent,
-          ),
-          const SizedBox( width: 10),
-          Expanded(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text( widget.userId, 
+      child: Row(children: [
+        CircleAvatar(
+          radius: 20,
+          child: ClipOval(child: Image.asset(widget.profilePicPath)),
+          backgroundColor: Colors.transparent,
+        ),
+        const SizedBox(width: 10),
+        Expanded(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(widget.userId,
                       style: const TextStyle(
                         color: Colors.black,
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
-                      ) 
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    Text( widget.notificationMessage,
+                      )),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  Text(widget.notificationMessage,
                       style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w300
-                      ) 
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    Text( widget.timePassed,
-                      style:  const TextStyle(
-                        color:  primaryShadowColor,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500
-                      )
-                    ),
-                  ],
-                ),
-              ],
-            ),
+                          color: Colors.black,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w300)),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  Text(widget.timePassed,
+                      style: const TextStyle(
+                          color: primaryShadowColor,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500)),
+                ],
+              ),
+            ],
           ),
-          if(widget.isFollow)
-            FollowButton()
-          else
-             ClipSmoothRect(
-               radius: SmoothBorderRadius(
-                 cornerRadius: 6, 
-                 cornerSmoothing: 1,
-               ),
-               child: Container(
-                 width: 40,
-                 height: 40,
-                 child: Image.asset(
-                    widget.postPic,
-                    fit: BoxFit.cover
-                   )
-                 )
-               )
-        ]
-      ),
+        ),
+        if (widget.isFollow)
+          FollowButton()
+        else
+          ClipSmoothRect(
+              radius: SmoothBorderRadius(
+                cornerRadius: 6,
+                cornerSmoothing: 1,
+              ),
+              child: Container(
+                  width: 40,
+                  height: 40,
+                  child: Image.asset(widget.postPic, fit: BoxFit.cover)))
+      ]),
     );
   }
 }
