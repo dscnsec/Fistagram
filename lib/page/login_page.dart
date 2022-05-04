@@ -1,7 +1,10 @@
+
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:fistagram/utils/colors.dart';
+import 'package:fistagram/utils/utils.dart';
 import 'package:fistagram/widgets/text_field_input.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -11,8 +14,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  @override
-  Widget build(BuildContext context) {
     final TextEditingController _emailController = TextEditingController();
     final TextEditingController _passwordController = TextEditingController();
 
@@ -22,6 +23,11 @@ class _LoginPageState extends State<LoginPage> {
       _emailController.dispose();
       _passwordController.dispose();
     }
+
+
+  @override
+  Widget build(BuildContext context) {
+    
 
     return Scaffold(
       backgroundColor: backgroundColor,
