@@ -1,8 +1,12 @@
+import 'dart:typed_data';
+
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:fistagram/resources/auth_methods.dart';
 import 'package:fistagram/utils/colors.dart';
+import 'package:fistagram/utils/utils.dart';
 import 'package:fistagram/widgets/text_field_input.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class SignupPage extends StatefulWidget {
   SignupPage({Key? key}) : super(key: key);
@@ -16,6 +20,8 @@ class _SignupPageState extends State<SignupPage> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _bioController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
+  Uint8List? _image;
+
   @override
   void dispose() {
     super.dispose();
@@ -23,6 +29,13 @@ class _SignupPageState extends State<SignupPage> {
     _passwordController.dispose();
     _bioController.dispose();
     _usernameController.dispose();
+  }
+
+  void selectImage() async {
+    Uint8List img = await pickImage(ImageSource.gallery);
+    setState(() {
+      _image = img;
+    });
   }
 
   @override
@@ -51,17 +64,24 @@ class _SignupPageState extends State<SignupPage> {
                   const SizedBox(height: 24),
                   //profile pic
                   Stack(children: [
-                    const CircleAvatar(
-                      radius: 64,
-                      backgroundImage: NetworkImage(
-                        'https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1631&q=80',
-                      ),
-                    ),
+                    _image != null
+                        ? CircleAvatar(
+                            radius: 64,
+                            backgroundImage: MemoryImage(_image!),
+                          )
+                        : const CircleAvatar(
+                            radius: 64,
+                            backgroundImage: NetworkImage(
+                              'https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1631&q=80',
+                            ),
+                          ),
                     Positioned(
                       bottom: -10,
                       left: 80,
                       child: IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            selectImage();
+                          },
                           icon: const Icon(
                             Icons.add_a_photo,
                             color: primaryColor,
