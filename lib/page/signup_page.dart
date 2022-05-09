@@ -54,7 +54,7 @@ class _SignupPageState extends State<SignupPage> {
       _isLoading = false;
     });
     if (result != 'success') {
-      ShowSnackBar(result, context);
+      showSnackBar(result, context);
     } else {}
   }
 
