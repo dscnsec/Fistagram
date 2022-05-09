@@ -21,6 +21,7 @@ class _SignupPageState extends State<SignupPage> {
   final TextEditingController _bioController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
   Uint8List? _image;
+  bool _isLoading = false;
 
   @override
   void dispose() {
@@ -36,6 +37,25 @@ class _SignupPageState extends State<SignupPage> {
     setState(() {
       _image = img;
     });
+  }
+
+  void signUpUser() async {
+    setState(() {
+      _isLoading = true;
+    });
+    String result = await AuthMethods().signUpUser(
+        email: _emailController.text,
+        password: _passwordController.text,
+        username: _usernameController.text,
+        bio: _bioController.text,
+        file: _image!);
+
+    setState(() {
+      _isLoading = false;
+    });
+    if (result != 'success') {
+      ShowSnackBar(result, context);
+    } else {}
   }
 
   @override
@@ -122,21 +142,20 @@ class _SignupPageState extends State<SignupPage> {
                   const SizedBox(height: 24),
                   InkWell(
                     onTap: () async {
-                      String res = await AuthMethods().signUpUser(
-                          email: _emailController.text,
-                          password: _passwordController.text,
-                          username: _usernameController.text,
-                          bio: _bioController.text,
-                          file: _image!);
-                      print(res);
+                      signUpUser();
                     },
                     child: Container(
-                      child: const Text(
-                        'Sign up',
-                        style: TextStyle(color: Colors.white),
-                      ),
+                      child: _isLoading
+                          ? const Center(
+                              child: CircularProgressIndicator(
+                                color: Colors.white,
+                              ),
+                            )
+                          : const Text(
+                              'Sign up',
+                              style: TextStyle(color: Colors.white),
+                            ),
                       width: double.infinity,
-                      height: 44,
                       alignment: Alignment.center,
                       padding: const EdgeInsets.symmetric(vertical: 12),
                       decoration: ShapeDecoration(
