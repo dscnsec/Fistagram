@@ -1,4 +1,5 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fistagram/custom_icons_icons.dart';
 import 'package:fistagram/page/home_page.dart';
@@ -8,6 +9,7 @@ import 'package:fistagram/page/search_page.dart';
 import 'package:fistagram/page/setting_page.dart';
 import 'package:fistagram/page/signup_page.dart';
 import 'package:fistagram/page/upload_page.dart';
+import 'package:fistagram/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -34,7 +36,26 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.blue,
             backgroundColor: const Color.fromARGB(255, 239, 243, 245)),
         // home: MainPage()
-        home: SignupPage());
+        home: StreamBuilder(
+            stream: FirebaseAuth.instance.authStateChanges(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.active) {
+                if (snapshot.hasData) {
+                  return MainPage();
+                } else if (snapshot.hasError) {
+                  return Center(
+                    child: Text('${snapshot.error}'),
+                  );
+                }
+              }
+
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(
+                    child: CircularProgressIndicator(color: primaryColor));
+              }
+
+              return LoginPage();
+            }));
   }
 }
 
