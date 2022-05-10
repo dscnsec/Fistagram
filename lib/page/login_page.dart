@@ -1,10 +1,10 @@
-
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:fistagram/utils/colors.dart';
 import 'package:fistagram/utils/utils.dart';
 import 'package:fistagram/widgets/text_field_input.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import '../resources/auth_methods.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key? key}) : super(key: key);
@@ -14,21 +14,37 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-    final TextEditingController _emailController = TextEditingController();
-    final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  bool _isLoading = false;
 
-    @override
-    void dispose() {
-      super.dispose();
-      _emailController.dispose();
-      _passwordController.dispose();
+  @override
+  void dispose() {
+    super.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+  }
+
+  void loginUser() async {
+    setState(() {
+      _isLoading = true;
+    });
+    String result = await AuthMethods().loginUser(
+        email: _emailController.text, password: _passwordController.text);
+
+    setState(() {
+      _isLoading = false;
+    });
+
+    if (result == "success") {
+      //
+    } else {
+      showSnackBar(result, context);
     }
-
+  }
 
   @override
   Widget build(BuildContext context) {
-    
-
     return Scaffold(
       backgroundColor: backgroundColor,
       body: SafeArea(
@@ -66,12 +82,19 @@ class _LoginPageState extends State<LoginPage> {
                 // button login
                 const SizedBox(height: 24),
                 InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    loginUser();
+                  },
                   child: Container(
-                    child: const Text(
-                      'Log in',
-                      style: TextStyle(color: Colors.white),
-                    ),
+                    child: _isLoading
+                        ? const Center(
+                            child:
+                                CircularProgressIndicator(color: Colors.white),
+                          )
+                        : const Text(
+                            'Log in',
+                            style: TextStyle(color: Colors.white),
+                          ),
                     width: double.infinity,
                     height: 44,
                     alignment: Alignment.center,
