@@ -96,7 +96,6 @@ class _LoginPageState extends State<LoginPage> {
                             style: TextStyle(color: Colors.white),
                           ),
                     width: double.infinity,
-                    height: 44,
                     alignment: Alignment.center,
                     padding: const EdgeInsets.symmetric(vertical: 12),
                     decoration: ShapeDecoration(
@@ -109,7 +108,6 @@ class _LoginPageState extends State<LoginPage> {
                         color: primaryButtonColor),
                   ),
                 ),
-                const SizedBox(height: 14),
                 Flexible(child: Container(), flex: 2),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
