@@ -1,4 +1,5 @@
 import 'package:figma_squircle/figma_squircle.dart';
+import 'package:fistagram/page/signup_page.dart';
 import 'package:fistagram/utils/colors.dart';
 import 'package:fistagram/utils/utils.dart';
 import 'package:fistagram/widgets/text_field_input.dart';
@@ -41,6 +42,11 @@ class _LoginPageState extends State<LoginPage> {
     } else {
       showSnackBar(result, context);
     }
+  }
+
+  void navigateToSignup() {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (context) => SignupPage()));
   }
 
   @override
@@ -118,7 +124,9 @@ class _LoginPageState extends State<LoginPage> {
                       padding: const EdgeInsets.symmetric(vertical: 8),
                     ),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        navigateToSignup();
+                      },
                       child: Container(
                           child: const Text(
                             "Sign up.",

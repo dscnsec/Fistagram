@@ -55,7 +55,15 @@ class _SignupPageState extends State<SignupPage> {
     });
     if (result != 'success') {
       showSnackBar(result, context);
-    } else {}
+    } else {
+      navigateToLoginPage();
+    }
+  }
+
+  void navigateToLoginPage() {
+    setState(() {
+      Navigator.of(context).pop();
+    });
   }
 
   @override
@@ -179,7 +187,9 @@ class _SignupPageState extends State<SignupPage> {
                         padding: const EdgeInsets.symmetric(vertical: 8),
                       ),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () {
+                          navigateToLoginPage();
+                        },
                         child: Container(
                             child: const Text(
                               "Log in.",
