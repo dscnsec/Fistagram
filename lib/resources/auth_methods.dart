@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fistagram/resources/storage_methods.dart';
 import 'package:flutter/material.dart';
+import 'package:fistagram/models/user.dart' as model;
 
 class AuthMethods {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -33,15 +34,17 @@ class AuthMethods {
             .uploadImageStorage('profilePics', file, false);
 
         //add usr to our database
-        _firestore.collection('user').doc(credential.user!.uid).set({
-          'username': username,
-          'uid': credential.user!.uid,
-          'email': email,
-          'bio': bio,
-          'followers': [],
-          'following': [],
-          'profileUrl': photoUrl,
-        });
+        model.User user = model.User(
+          username: username,
+          uid: credential.user!.uid,
+          email:email,
+          bio: bio,
+          followers: [],
+          following: [],
+          profileUrl: photoUrl
+        );
+
+        _firestore.collection('user').doc(credential.user!.uid).set(user.toJson());
 
         res = "success";
       }
