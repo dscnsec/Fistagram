@@ -51,7 +51,7 @@ class AuthMethods {
             bio: bio,
             followers: [],
             following: [],
-            profileUrl: photoUrl);
+            profilePicUrl: photoUrl);
 
         _firestore
             .collection('user')
