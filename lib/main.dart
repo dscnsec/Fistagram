@@ -9,9 +9,11 @@ import 'package:fistagram/page/search_page.dart';
 import 'package:fistagram/page/setting_page.dart';
 import 'package:fistagram/page/signup_page.dart';
 import 'package:fistagram/page/upload_page.dart';
+import 'package:fistagram/providers/user_provider.dart';
 import 'package:fistagram/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -30,32 +32,37 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-            primarySwatch: Colors.blue,
-            backgroundColor: const Color.fromARGB(255, 239, 243, 245)),
-        // home: MainPage()
-        home: StreamBuilder(
-            stream: FirebaseAuth.instance.authStateChanges(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.active) {
-                if (snapshot.hasData) {
-                  return MainPage();
-                } else if (snapshot.hasError) {
-                  return Center(
-                    child: Text('${snapshot.error}'),
-                  );
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => UserProvider()),
+      ],
+      child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+              primarySwatch: Colors.blue,
+              backgroundColor: const Color.fromARGB(255, 239, 243, 245)),
+          // home: MainPage()
+          home: StreamBuilder(
+              stream: FirebaseAuth.instance.authStateChanges(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.active) {
+                  if (snapshot.hasData) {
+                    return MainPage();
+                  } else if (snapshot.hasError) {
+                    return Center(
+                      child: Text('${snapshot.error}'),
+                    );
+                  }
                 }
-              }
 
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(
-                    child: CircularProgressIndicator(color: primaryColor));
-              }
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(
+                      child: CircularProgressIndicator(color: primaryColor));
+                }
 
-              return LoginPage();
-            }));
+                return LoginPage();
+              })),
+    );
   }
 }
 
