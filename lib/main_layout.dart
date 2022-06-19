@@ -4,7 +4,6 @@ import 'package:fistagram/page/setting_page.dart';
 import 'package:fistagram/page/upload_page.dart';
 import 'package:flutter/material.dart';
 import 'package:fistagram/page/home_page.dart';
-import 'package:fistagram/page/login_page.dart';
 import 'package:fistagram/page/notification_page.dart';
 import 'package:fistagram/page/search_page.dart';
 
