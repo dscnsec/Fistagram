@@ -16,6 +16,19 @@ class MainLayout extends StatefulWidget {
 
 class _MainLayoutState extends State<MainLayout> {
   int _page = 0;
+  late PageController pageController;
+
+  @override
+  void initState() {
+    super.initState();
+    pageController = PageController();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    pageController.dispose();
+  }
 
   final screens = [
     HomePage(),
@@ -24,6 +37,16 @@ class _MainLayoutState extends State<MainLayout> {
     NotificationPage(),
     SettingPage()
   ];
+
+  void navigationTapped(int page) {
+    pageController.jumpToPage(page);
+  }
+
+  void onPageChanged(int page) {
+    setState(() {
+      _page = page;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,10 +61,16 @@ class _MainLayoutState extends State<MainLayout> {
     return Scaffold(
       extendBody: true,
       backgroundColor: const Color.fromARGB(255, 239, 243, 245),
-      body: screens[_page],
+      body: PageView(
+        children: screens,
+        controller: pageController,
+        onPageChanged: onPageChanged,
+        physics: const BouncingScrollPhysics(),
+      ),
       bottomNavigationBar: Theme(
         data: Theme.of(context).copyWith(
-            iconTheme: const IconThemeData(color: const Color.fromARGB(255, 60, 97, 112))),
+            iconTheme: const IconThemeData(
+                color: const Color.fromARGB(255, 60, 97, 112))),
         child: CurvedNavigationBar(
           animationCurve: Curves.easeInOut,
           animationDuration: const Duration(milliseconds: 300),
@@ -52,7 +81,7 @@ class _MainLayoutState extends State<MainLayout> {
           index: 0,
           onTap: (index) {
             setState(() {
-              _page = index;
+              navigationTapped(index);
             });
           },
         ),
