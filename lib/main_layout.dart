@@ -78,9 +78,10 @@ class _MainLayoutState extends State<MainLayout> {
           color: const Color.fromARGB(255, 246, 252, 255),
           height: 65,
           items: items,
-          index: 0,
+          index: _page,
           onTap: (index) {
             setState(() {
+              _page = index;
               navigationTapped(index);
             });
           },
