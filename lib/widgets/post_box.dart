@@ -75,7 +75,7 @@ class _PostBoxState extends State<PostBox> {
           ),
           child: Container(
               height: MediaQuery.of(context).size.height * 0.45,
-              width: MediaQuery.of(context).size.height * 0.45,
+              width: MediaQuery.of(context).size.width * 0.9,
               child: Image.asset(widget.imagePath, fit: BoxFit.cover)),
         ),
         //-----------------------Footer section----------------------
