@@ -22,6 +22,7 @@ class User {
   Map<String, dynamic> toJson() => {
         "username": username,
         "uid": uid,
+        "email": email,
         "profilePicUrl": profilePicUrl,
         "bio": bio,
         "followers": followers,
@@ -37,7 +38,7 @@ class User {
       bio: snapshot['bio'],
       uid: snapshot['uid'],
       email: snapshot['email'],
-      profilePicUrl: snapshot['photoUrl'],
+      profilePicUrl: snapshot['profilePicUrl'],
       followers: snapshot['followers'],
       following: snapshot['following'],
     );
