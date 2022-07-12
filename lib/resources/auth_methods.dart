@@ -15,7 +15,7 @@ class AuthMethods {
     User currentUser = _auth.currentUser!;
 
     DocumentSnapshot snap =
-        await _firestore.collection('users').doc(currentUser.uid).get();
+        await _firestore.collection('user').doc(currentUser.uid).get();
 
     return model.User.fromSnap(snap);
   }
@@ -40,7 +40,7 @@ class AuthMethods {
 
         print("user uid" + credential.user!.uid);
 
-        String photoUrl = await StorageMethods()
+        String profilePicUrl = await StorageMethods()
             .uploadImageStorage('profilePics', file, false);
 
         //add usr to our database
@@ -51,7 +51,7 @@ class AuthMethods {
             bio: bio,
             followers: [],
             following: [],
-            profilePicUrl: photoUrl);
+            profilePicUrl: profilePicUrl);
 
         _firestore
             .collection('user')
