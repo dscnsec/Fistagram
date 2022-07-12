@@ -2,10 +2,12 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:fistagram/custom_icons_icons.dart';
 import 'package:fistagram/page/setting_page.dart';
 import 'package:fistagram/page/upload_page.dart';
+import 'package:fistagram/providers/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:fistagram/page/home_page.dart';
 import 'package:fistagram/page/notification_page.dart';
 import 'package:fistagram/page/search_page.dart';
+import 'package:provider/provider.dart';
 
 class MainLayout extends StatefulWidget {
   MainLayout({Key? key}) : super(key: key);
@@ -21,6 +23,7 @@ class _MainLayoutState extends State<MainLayout> {
   @override
   void initState() {
     super.initState();
+    addData();
     pageController = PageController();
   }
 
@@ -28,6 +31,12 @@ class _MainLayoutState extends State<MainLayout> {
   void dispose() {
     super.dispose();
     pageController.dispose();
+  }
+
+  addData() async {
+    UserProvider _userProvider =
+        Provider.of<UserProvider>(context, listen: false);
+    await _userProvider.refreshUser();
   }
 
   final screens = [
