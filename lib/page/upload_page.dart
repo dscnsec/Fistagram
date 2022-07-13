@@ -4,6 +4,7 @@ import 'package:figma_squircle/figma_squircle.dart';
 import 'package:fistagram/custom_icons_icons.dart';
 import 'package:fistagram/models/user.dart';
 import 'package:fistagram/providers/user_provider.dart';
+import 'package:fistagram/resources/firestore_methods.dart';
 import 'package:fistagram/utils/colors.dart';
 import 'package:fistagram/utils/utils.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +22,32 @@ class _UploadPageState extends State<UploadPage> {
   Uint8List? _file;
   final TextEditingController _descriptionController = TextEditingController();
 
-  //Todo: replace upload dialog box with camera interface 
+  void postImage(
+    String uid,
+    String username,
+    String profImage,
+  ) async {
+    try {
+      String res = await FirestoreMethods().uploadPost(
+          _descriptionController.text, _file!, uid, username, profImage);
+
+      if (res == "success") {
+        showSnackBar('Posted!', context);
+      }
+      else
+        showSnackBar('res', context);
+    } catch (e) {
+      showSnackBar(e.toString(), context);
+    }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _descriptionController.dispose();
+  }
+
+  //Todo: replace upload dialog box with camera interface
   _selectImage(BuildContext context) {
     return showDialog(
         context: context,
@@ -69,7 +95,6 @@ class _UploadPageState extends State<UploadPage> {
   Widget build(BuildContext context) {
     final User user = Provider.of<UserProvider>(context).getUser;
 
-    
     return _file == null
         ? Center(
             child: IconButton(
@@ -93,7 +118,7 @@ class _UploadPageState extends State<UploadPage> {
               centerTitle: false,
               actions: [
                 TextButton(
-                    onPressed: () {},
+                    onPressed: () => postImage(user.uid, user.username, user.profilePicUrl),
                     style: ButtonStyle(
                       padding: MaterialStateProperty.all<EdgeInsets>(
                           EdgeInsets.zero),
