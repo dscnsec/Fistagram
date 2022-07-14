@@ -21,20 +21,25 @@ class UploadPage extends StatefulWidget {
 class _UploadPageState extends State<UploadPage> {
   Uint8List? _file;
   final TextEditingController _descriptionController = TextEditingController();
-
+  bool _isLoading = false;
   void postImage(
     String uid,
     String username,
     String profImage,
   ) async {
+    setState(() {
+      _isLoading = true;
+    });
     try {
       String res = await FirestoreMethods().uploadPost(
           _descriptionController.text, _file!, uid, username, profImage);
 
       if (res == "success") {
+        setState(() {
+          _isLoading = false;
+        });
         showSnackBar('Posted!', context);
-      }
-      else
+      } else
         showSnackBar('res', context);
     } catch (e) {
       showSnackBar(e.toString(), context);
@@ -118,7 +123,8 @@ class _UploadPageState extends State<UploadPage> {
               centerTitle: false,
               actions: [
                 TextButton(
-                    onPressed: () => postImage(user.uid, user.username, user.profilePicUrl),
+                    onPressed: () =>
+                        postImage(user.uid, user.username, user.profilePicUrl),
                     style: ButtonStyle(
                       padding: MaterialStateProperty.all<EdgeInsets>(
                           EdgeInsets.zero),
@@ -147,6 +153,10 @@ class _UploadPageState extends State<UploadPage> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
+                      _isLoading
+                          ? const LinearProgressIndicator()
+                          : const Padding(padding: EdgeInsets.only(top: 0)),
+                      const SizedBox(height: 8,),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         crossAxisAlignment: CrossAxisAlignment.start,
