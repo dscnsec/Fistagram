@@ -35,6 +35,7 @@ class _UploadPageState extends State<UploadPage> {
           _descriptionController.text, _file!, uid, username, profImage);
 
       if (res == "success") {
+        clearImage();
         setState(() {
           _isLoading = false;
         });
@@ -96,6 +97,12 @@ class _UploadPageState extends State<UploadPage> {
         });
   }
 
+  void clearImage() {
+    setState(() {
+      _file = null;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final User user = Provider.of<UserProvider>(context).getUser;
@@ -114,7 +121,9 @@ class _UploadPageState extends State<UploadPage> {
               backgroundColor: backgroundColor,
               leading: IconButton(
                 icon: const Icon(Icons.arrow_back),
-                onPressed: () {},
+                onPressed: () {
+                  clearImage();
+                },
               ),
               title: const Text(
                 'Post to',
@@ -156,7 +165,9 @@ class _UploadPageState extends State<UploadPage> {
                       _isLoading
                           ? const LinearProgressIndicator()
                           : const Padding(padding: EdgeInsets.only(top: 0)),
-                      const SizedBox(height: 8,),
+                      const SizedBox(
+                        height: 8,
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         crossAxisAlignment: CrossAxisAlignment.start,
