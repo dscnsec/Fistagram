@@ -29,8 +29,8 @@ class _MainLayoutState extends State<MainLayout> {
 
   @override
   void dispose() {
-    super.dispose();
     pageController.dispose();
+    super.dispose();
   }
 
   addData() async {

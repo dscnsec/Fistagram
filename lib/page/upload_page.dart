@@ -49,8 +49,8 @@ class _UploadPageState extends State<UploadPage> {
 
   @override
   void dispose() {
-    super.dispose();
     _descriptionController.dispose();
+    super.dispose();
   }
 
   //Todo: replace upload dialog box with camera interface
