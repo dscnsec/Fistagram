@@ -7,7 +7,7 @@ import 'package:fistagram/models/user.dart';
 import 'package:fistagram/providers/user_provider.dart';
 import 'package:fistagram/resources/firestore_methods.dart';
 import 'package:fistagram/utils/colors.dart';
-import 'package:fistagram/utils/take_picture_screen.dart';
+import 'package:fistagram/utils/camera_utils.dart';
 import 'package:fistagram/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -65,7 +65,7 @@ class _UploadPageState extends State<UploadPage> {
       child: FractionallySizedBox(
           widthFactor: 0.8,
           heightFactor: 0.8,
-          child: Container(child: TakePictureScreen(camera: firstCamera))),
+          child: Container(child: CameraUtils(camera: firstCamera))),
     );
   }
 
