@@ -1,5 +1,7 @@
+import 'package:camera/camera.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:fistagram/custom_icons_icons.dart';
+import 'package:fistagram/main.dart';
 import 'package:fistagram/page/setting_page.dart';
 import 'package:fistagram/page/upload_page.dart';
 import 'package:fistagram/providers/user_provider.dart';
@@ -10,7 +12,8 @@ import 'package:fistagram/page/search_page.dart';
 import 'package:provider/provider.dart';
 
 class MainLayout extends StatefulWidget {
-  MainLayout({Key? key}) : super(key: key);
+  MainLayout({Key? key, required this.cameras}) : super(key: key);
+  final List<CameraDescription> cameras;
 
   @override
   State<MainLayout> createState() => _MainLayoutState();
@@ -42,7 +45,7 @@ class _MainLayoutState extends State<MainLayout> {
   final screens = [
     HomePage(),
     SearchPage(),
-    UploadPage(),
+    UploadPage(cameras: cameras,),
     NotificationPage(),
     SettingPage()
   ];

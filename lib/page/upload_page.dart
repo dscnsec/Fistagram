@@ -1,18 +1,21 @@
 import 'dart:typed_data';
 
+import 'package:camera/camera.dart';
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:fistagram/custom_icons_icons.dart';
 import 'package:fistagram/models/user.dart';
 import 'package:fistagram/providers/user_provider.dart';
 import 'package:fistagram/resources/firestore_methods.dart';
 import 'package:fistagram/utils/colors.dart';
+import 'package:fistagram/utils/take_picture_screen.dart';
 import 'package:fistagram/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 class UploadPage extends StatefulWidget {
-  UploadPage({Key? key}) : super(key: key);
+  UploadPage({Key? key, required this.cameras}) : super(key: key);
+  final List<CameraDescription> cameras;
 
   @override
   State<UploadPage> createState() => _UploadPageState();
@@ -54,6 +57,18 @@ class _UploadPageState extends State<UploadPage> {
   }
 
   //Todo: replace upload dialog box with camera interface
+
+  _cameraPreviewSelectImage(BuildContext context) {
+    final firstCamera = widget.cameras[0];
+
+    return Container(
+      child: FractionallySizedBox(
+          widthFactor: 0.8,
+          heightFactor: 0.8,
+          child: Container(child: TakePictureScreen(camera: firstCamera))),
+    );
+  }
+
   _selectImage(BuildContext context) {
     return showDialog(
         context: context,
@@ -108,13 +123,14 @@ class _UploadPageState extends State<UploadPage> {
     final User user = Provider.of<UserProvider>(context).getUser;
 
     return _file == null
-        ? Center(
-            child: IconButton(
-            icon: const Icon(Icons.upload),
-            onPressed: () {
-              _selectImage(context);
-            },
-          ))
+        ? _cameraPreviewSelectImage(context)
+        // Center(
+        //     child: IconButton(
+        //     icon: const Icon(Icons.upload),
+        //     onPressed: () {
+        //       _selectImage(context);
+        //     },
+        //   ))
         : Scaffold(
             appBar: AppBar(
               foregroundColor: primaryColor,

@@ -10,22 +10,20 @@ class TakePictureScreen extends StatefulWidget {
 }
 
 class _TakePictureScreenState extends State<TakePictureScreen> {
-  CameraController? _cameraController;
-  Future<void>? _initializeControllerFuture;
+  late CameraController _cameraController;
+  late Future<void> _initializeControllerFuture;
 
   @override
-  void iniState() {
+  void initState() {
     super.initState();
     _cameraController = CameraController(widget.camera, ResolutionPreset.high);
-    _initializeControllerFuture = _cameraController!.initialize();
-    WidgetsBinding.instance.addPostFrameCallback((_)=> setState(() {
-      
-    }) );
+    _initializeControllerFuture = _cameraController.initialize();
+    WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
 
   @override
   void dispose() {
-    _cameraController!.dispose();
+    _cameraController.dispose();
     super.dispose();
   }
 
@@ -36,7 +34,7 @@ class _TakePictureScreenState extends State<TakePictureScreen> {
       future: _initializeControllerFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          return CameraPreview(_cameraController!);
+          return CameraPreview(_cameraController);
         }
         return const Center(child: CircularProgressIndicator());
       },
