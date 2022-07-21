@@ -59,58 +59,77 @@ class _UploadPageState extends State<UploadPage> {
   //Todo: replace upload dialog box with camera interface
 
   _cameraPreviewSelectImage(BuildContext context) {
-    final firstCamera = widget.cameras[0];
+    //Todo: change camera to back after debugging
+    final firstCamera = widget.cameras[1];
 
-    return Container(
-      child: FractionallySizedBox(
-          widthFactor: 0.8,
-          heightFactor: 0.8,
-          child: Container(child: CameraUtils(camera: firstCamera))),
+    return FractionallySizedBox(
+      widthFactor: 0.9,
+      heightFactor: 0.85,
+      child: ClipSmoothRect(
+          radius: SmoothBorderRadius(cornerRadius: 12, cornerSmoothing: 1),
+          child: Stack(
+              clipBehavior: Clip.hardEdge,
+              alignment: Alignment.bottomCenter,
+              children: [
+                CameraUtils(camera: firstCamera),
+                Positioned(
+                  bottom: 10,
+                  right: 140,
+                  child: InkWell(
+                      onTap: () {},
+                      child:
+                          Stack(alignment: Alignment.center, children: const [
+                        Icon(Icons.circle_outlined,
+                            color: Colors.black, size: 80),
+                        Icon(Icons.circle, color: Colors.black, size: 60)
+                      ])),
+                )
+              ])),
     );
   }
 
-  _selectImage(BuildContext context) {
-    return showDialog(
-        context: context,
-        builder: (context) {
-          return SimpleDialog(
-            title: const Text('Creat a Post'),
-            children: [
-              SimpleDialogOption(
-                padding: const EdgeInsets.all(2),
-                child: const Text('Take a photo'),
-                onPressed: () async {
-                  Navigator.of(context).pop();
-                  Uint8List file = await pickImage(
-                    ImageSource.camera,
-                  );
-                  setState(() {
-                    _file = file;
-                  });
-                },
-              ),
-              SimpleDialogOption(
-                  padding: const EdgeInsets.all(2),
-                  child: const Text('Choose from gallery'),
-                  onPressed: () async {
-                    Navigator.of(context).pop();
-                    Uint8List file = await pickImage(
-                      ImageSource.gallery,
-                    );
-                    setState(() {
-                      _file = file;
-                    });
-                  }),
-              SimpleDialogOption(
-                  padding: const EdgeInsets.all(2),
-                  child: const Text('Cancel'),
-                  onPressed: () async {
-                    Navigator.of(context).pop();
-                  })
-            ],
-          );
-        });
-  }
+  // _selectImage(BuildContext context) {
+  //   return showDialog(
+  //       context: context,
+  //       builder: (context) {
+  //         return SimpleDialog(
+  //           title: const Text('Creat a Post'),
+  //           children: [
+  //             SimpleDialogOption(
+  //               padding: const EdgeInsets.all(2),
+  //               child: const Text('Take a photo'),
+  //               onPressed: () async {
+  //                 Navigator.of(context).pop();
+  //                 Uint8List file = await pickImage(
+  //                   ImageSource.camera,
+  //                 );
+  //                 setState(() {
+  //                   _file = file;
+  //                 });
+  //               },
+  //             ),
+  //             SimpleDialogOption(
+  //                 padding: const EdgeInsets.all(2),
+  //                 child: const Text('Choose from gallery'),
+  //                 onPressed: () async {
+  //                   Navigator.of(context).pop();
+  //                   Uint8List file = await pickImage(
+  //                     ImageSource.gallery,
+  //                   );
+  //                   setState(() {
+  //                     _file = file;
+  //                   });
+  //                 }),
+  //             SimpleDialogOption(
+  //                 padding: const EdgeInsets.all(2),
+  //                 child: const Text('Cancel'),
+  //                 onPressed: () async {
+  //                   Navigator.of(context).pop();
+  //                 })
+  //           ],
+  //         );
+  //       });
+  // }
 
   void clearImage() {
     setState(() {
