@@ -73,15 +73,15 @@ class _UploadPageState extends State<UploadPage> {
               children: [
                 CameraUtils(camera: firstCamera),
                 Positioned(
-                  bottom: 10,
+                  bottom: 20,
                   right: 140,
                   child: InkWell(
                       onTap: () {},
                       child:
                           Stack(alignment: Alignment.center, children: const [
                         Icon(Icons.circle_outlined,
-                            color: Colors.black, size: 80),
-                        Icon(Icons.circle, color: Colors.black, size: 60)
+                            color: Colors.white, size: 80),
+                        Icon(Icons.circle, color: Colors.white, size: 60)
                       ])),
                 )
               ])),
