@@ -63,8 +63,9 @@ class _UploadPageState extends State<UploadPage> {
     final firstCamera = widget.cameras[1];
 
     return FractionallySizedBox(
+      alignment: Alignment.topCenter,
       widthFactor: 0.9,
-      heightFactor: 0.85,
+      heightFactor: 0.88,
       child: ClipSmoothRect(
           radius: SmoothBorderRadius(cornerRadius: 12, cornerSmoothing: 1),
           child: Stack(
@@ -142,7 +143,15 @@ class _UploadPageState extends State<UploadPage> {
     final User user = Provider.of<UserProvider>(context).getUser;
 
     return _file == null
-        ? _cameraPreviewSelectImage(context)
+        ? Container(
+            padding: const EdgeInsets.only(top: 50),
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(child: _cameraPreviewSelectImage(context)),
+                ]),
+          )
         // Center(
         //     child: IconButton(
         //     icon: const Icon(Icons.upload),
