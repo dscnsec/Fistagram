@@ -29,12 +29,16 @@ class _CameraUtilsState extends State<CameraUtils> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
         body: FutureBuilder<void>(
       future: _initializeControllerFuture,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done) {
-          return CameraPreview(_cameraController);
+          return Center(
+              child: Transform.scale(
+                  scale: _cameraController.value.aspectRatio,
+                  child: CameraPreview(_cameraController)));
         }
         return const Center(child: CircularProgressIndicator());
       },
