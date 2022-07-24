@@ -23,13 +23,13 @@ void main() async {
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Color.fromARGB(255, 239, 243, 245),
     statusBarIconBrightness: Brightness.dark,
-    systemNavigationBarColor: Color.fromARGB(235, 246, 252, 255),
+    systemNavigationBarColor: const Color.fromARGB(255, 246, 252, 255),
   ));
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-  
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -48,7 +48,9 @@ class MyApp extends StatelessWidget {
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.active) {
                   if (snapshot.hasData) {
-                    return MainLayout(cameras: cameras,);
+                    return MainLayout(
+                      cameras: cameras,
+                    );
                   } else if (snapshot.hasError) {
                     return Center(
                       child: Text('${snapshot.error}'),
