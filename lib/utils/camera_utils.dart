@@ -5,6 +5,7 @@ class CameraUtils extends StatefulWidget {
   const CameraUtils({key, required this.camera});
 
   final CameraDescription camera;
+
   @override
   State<CameraUtils> createState() => _CameraUtilsState();
 }
@@ -27,9 +28,18 @@ class _CameraUtilsState extends State<CameraUtils> {
     super.dispose();
   }
 
+  clickPicture() async {
+    try {
+      await _initializeControllerFuture;
+      XFile _file = await _cameraController.takePicture();
+      return _file.readAsBytes();
+    } catch (e) {
+      debugPrint("takePicture() Error : ${e.toString()}");
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
         body: FutureBuilder<void>(
       future: _initializeControllerFuture,
