@@ -72,19 +72,15 @@ class _UploadPageState extends State<UploadPage> {
               clipBehavior: Clip.hardEdge,
               alignment: Alignment.bottomCenter,
               children: [
-                CameraUtils(camera: firstCamera),
-                Positioned(
-                  bottom: 20,
-                  right: 140,
-                  child: InkWell(
-                      onTap: () {},
-                      child:
-                          Stack(alignment: Alignment.center, children: const [
-                        Icon(Icons.circle_outlined,
-                            color: Colors.white, size: 80),
-                        Icon(Icons.circle, color: Colors.white, size: 60)
-                      ])),
-                )
+                CameraUtils(
+                  camera: firstCamera,
+                  file_callback: (file) async {
+                    await file;
+                    setState(() {
+                      _file = file;
+                    });
+                  },
+                ),
               ])),
     );
   }

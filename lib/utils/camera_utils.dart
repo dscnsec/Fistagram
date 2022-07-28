@@ -31,7 +31,6 @@ class _CameraUtilsState extends State<CameraUtils> {
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,15 +46,22 @@ class _CameraUtilsState extends State<CameraUtils> {
           return const Center(child: CircularProgressIndicator());
         },
       ),
-      floatingActionButton: FloatingActionButton(onPressed: () async {
-        try {
-          await _initializeControllerFuture;
-          XFile file = await _cameraController.takePicture();
-          widget.file_callback(file.readAsBytes());
-        } catch (e) {
-          debugPrint("take picture error: ${e.toString()}");
-        }
-      }),
+      floatingActionButton: InkWell(
+        onTap: () async {
+          try {
+            await _initializeControllerFuture;
+            XFile file = await _cameraController.takePicture();
+            widget.file_callback(file.readAsBytes());
+          } catch (e) {
+            debugPrint("take picture error: ${e.toString()}");
+          }
+        },
+        child: Stack(alignment: Alignment.center, children: const [
+          Icon(Icons.circle_outlined, color: Colors.white, size: 80),
+          Icon(Icons.circle, color: Colors.white, size: 60)
+        ]),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
