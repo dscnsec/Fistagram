@@ -51,7 +51,7 @@ class _CameraUtilsState extends State<CameraUtils> {
           try {
             await _initializeControllerFuture;
             XFile file = await _cameraController.takePicture();
-            widget.file_callback(file.readAsBytes());
+            widget.file_callback(await file.readAsBytes());
           } catch (e) {
             debugPrint("take picture error: ${e.toString()}");
           }
