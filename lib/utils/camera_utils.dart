@@ -1,9 +1,12 @@
+import 'dart:typed_data';
+
+import 'package:fistagram/page/upload_page.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 
 class CameraUtils extends StatefulWidget {
-  const CameraUtils({key, required this.camera});
-
+  const CameraUtils({key, required this.camera, required this.file_callback});
+  final ValueGetter file_callback;
   final CameraDescription camera;
 
   @override
@@ -28,30 +31,33 @@ class _CameraUtilsState extends State<CameraUtils> {
     super.dispose();
   }
 
-  clickPicture() async {
-    try {
-      await _initializeControllerFuture;
-      XFile _file = await _cameraController.takePicture();
-      return _file.readAsBytes();
-    } catch (e) {
-      debugPrint("takePicture() Error : ${e.toString()}");
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: FutureBuilder<void>(
-      future: _initializeControllerFuture,
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done) {
-          return Center(
-              child: Transform.scale(
-                  scale: _cameraController.value.aspectRatio,
-                  child: CameraPreview(_cameraController)));
+      body: FutureBuilder<void>(
+        future: _initializeControllerFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return Center(
+                child: Transform.scale(
+                    scale: _cameraController.value.aspectRatio,
+                    child: CameraPreview(_cameraController)));
+          }
+          return const Center(child: CircularProgressIndicator());
+        },
+      ),
+      floatingActionButton: FloatingActionButton(onPressed: () async {
+        try {
+          await _initializeControllerFuture;
+          XFile file = await _cameraController.takePicture();
+          widget.file_callback(file.readAsBytes());
+        } catch (e) {
+          debugPrint("take picture error: ${e.toString()}");
         }
-        return const Center(child: CircularProgressIndicator());
-      },
-    ));
+      }),
+    );
   }
 }
+
+typedef ValueGetter<Uint8List> = Uint8List Function(Uint8List file);
