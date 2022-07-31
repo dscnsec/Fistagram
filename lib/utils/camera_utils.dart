@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:fistagram/main.dart';
 import 'package:fistagram/page/upload_page.dart';
 import 'package:fistagram/utils/colors.dart';
 import 'package:fistagram/utils/utils.dart';
@@ -8,9 +9,9 @@ import 'package:camera/camera.dart';
 import 'package:image_picker/image_picker.dart';
 
 class CameraUtils extends StatefulWidget {
-  const CameraUtils({key, required this.camera, required this.file_callback});
+  const CameraUtils({key, required this.cameras, required this.file_callback});
   final ValueGetter file_callback;
-  final CameraDescription camera;
+  final List<CameraDescription> cameras;
 
   @override
   State<CameraUtils> createState() => _CameraUtilsState();
@@ -19,11 +20,13 @@ class CameraUtils extends StatefulWidget {
 class _CameraUtilsState extends State<CameraUtils> {
   late CameraController _cameraController;
   late Future<void> _initializeControllerFuture;
+  bool _isRearCameraSelected = true;
 
   @override
   void initState() {
     super.initState();
-    _cameraController = CameraController(widget.camera, ResolutionPreset.high);
+    _cameraController = CameraController(
+        widget.cameras[_isRearCameraSelected ? 0 : 1], ResolutionPreset.high);
     _initializeControllerFuture = _cameraController.initialize();
     WidgetsBinding.instance.addPostFrameCallback((_) => setState(() {}));
   }
@@ -51,6 +54,40 @@ class _CameraUtilsState extends State<CameraUtils> {
       ),
       floatingActionButton:
           Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Flexible(child: Container(), flex: 1),
+        //*------------------Reverse Camera Button----------
+        Align(
+            alignment: Alignment.bottomLeft,
+            child: InkWell(
+              onTap: () async {
+                try {
+                  final previousCameraController = _cameraController;
+
+                  final newcameraController = CameraController(
+                      widget.cameras[_isRearCameraSelected ? 1 : 0],
+                      ResolutionPreset.high);
+
+                  _isRearCameraSelected = !_isRearCameraSelected;
+
+                  await previousCameraController.dispose();
+
+                  if (mounted) {
+                    setState(() {
+                      _cameraController = newcameraController;
+                      _initializeControllerFuture =
+                          _cameraController.initialize();
+                    });
+                  }
+                } catch (e) {
+                  debugPrint("Reverse Camera button : ${e.toString()}");
+                }
+              },
+              child: Icon(
+                Icons.change_circle,
+                size: 54,
+                color: Colors.white,
+              ),
+            )),
         Flexible(child: Container(), flex: 1),
         //*---------------------Capture Button--------------
         Align(
@@ -87,11 +124,12 @@ class _CameraUtilsState extends State<CameraUtils> {
               child: CircleAvatar(
                 backgroundColor: Colors.white,
                 child: CircleAvatar(
+                  radius: 22,
                   backgroundColor: primaryColor,
                   child: Image.asset('assets/img/UI/gallery_icon.png',
-                      width: 22, fit: BoxFit.contain),
+                      width: 24, fit: BoxFit.contain),
                 ),
-                radius: 22,
+                radius: 24,
               )),
         ),
         Flexible(child: Container(), flex: 1)
