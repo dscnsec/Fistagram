@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:fistagram/page/upload_page.dart';
+import 'package:fistagram/utils/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 
@@ -46,21 +47,46 @@ class _CameraUtilsState extends State<CameraUtils> {
           return const Center(child: CircularProgressIndicator());
         },
       ),
-      floatingActionButton: InkWell(
-        onTap: () async {
-          try {
-            await _initializeControllerFuture;
-            XFile file = await _cameraController.takePicture();
-            widget.file_callback(await file.readAsBytes());
-          } catch (e) {
-            debugPrint("take picture error: ${e.toString()}");
-          }
-        },
-        child: Stack(alignment: Alignment.center, children: const [
-          Icon(Icons.circle_outlined, color: Colors.white, size: 80),
-          Icon(Icons.circle, color: Colors.white, size: 60)
-        ]),
-      ),
+      floatingActionButton:
+          Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Flexible(child: Container(), flex: 1),
+        //*---------------------Capture Button--------------
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: InkWell(
+            onTap: () async {
+              try {
+                await _initializeControllerFuture;
+                XFile file = await _cameraController.takePicture();
+                widget.file_callback(await file.readAsBytes());
+              } catch (e) {
+                debugPrint("take picture error: ${e.toString()}");
+              }
+            },
+            child: Stack(alignment: Alignment.center, children: const [
+              Icon(Icons.circle_outlined, color: Colors.white, size: 80),
+              Icon(Icons.circle, color: Colors.white, size: 60)
+            ]),
+          ),
+        ),
+        Flexible(child: Container(), flex: 1),
+        //*---------------------Gallery Button--------------
+        Align(
+          alignment: Alignment.bottomRight,
+          child: InkWell(
+              onTap: () {},
+              child: CircleAvatar(
+                backgroundColor: Colors.white,
+                child: CircleAvatar(
+                  backgroundColor: primaryColor,
+                  child: Image.asset('assets/img/UI/gallery_icon.png',
+                      width: 22, fit: BoxFit.contain),
+                ),
+                radius: 22,
+              )),
+        ),
+        Flexible(child: Container(), flex: 1)
+      ]),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
