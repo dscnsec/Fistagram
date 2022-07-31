@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:camera/camera.dart';
 import 'package:figma_squircle/figma_squircle.dart';
 import 'package:fistagram/custom_icons_icons.dart';
+import 'package:fistagram/main.dart';
 import 'package:fistagram/models/user.dart';
 import 'package:fistagram/providers/user_provider.dart';
 import 'package:fistagram/resources/firestore_methods.dart';
@@ -59,8 +60,6 @@ class _UploadPageState extends State<UploadPage> {
   //Todo: replace upload dialog box with camera interface
 
   _cameraPreviewSelectImage(BuildContext context) {
-    //Todo: change camera to back after debugging
-    final firstCamera = widget.cameras[1];
 
     return FractionallySizedBox(
       alignment: Alignment.topCenter,
@@ -73,7 +72,7 @@ class _UploadPageState extends State<UploadPage> {
               alignment: Alignment.bottomCenter,
               children: [
                 CameraUtils(
-                  camera: firstCamera,
+                  cameras: cameras,
                   file_callback: (file) async {
                     await file;
                     setState(() {
