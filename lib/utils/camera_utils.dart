@@ -2,8 +2,10 @@ import 'dart:typed_data';
 
 import 'package:fistagram/page/upload_page.dart';
 import 'package:fistagram/utils/colors.dart';
+import 'package:fistagram/utils/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
+import 'package:image_picker/image_picker.dart';
 
 class CameraUtils extends StatefulWidget {
   const CameraUtils({key, required this.camera, required this.file_callback});
@@ -74,7 +76,14 @@ class _CameraUtilsState extends State<CameraUtils> {
         Align(
           alignment: Alignment.bottomRight,
           child: InkWell(
-              onTap: () {},
+              onTap: () async {
+                try {
+                  Uint8List file = await pickImage(ImageSource.gallery);
+                  widget.file_callback(file);
+                } catch (e) {
+                  debugPrint("Gallery button: ${e.toString()}");
+                }
+              },
               child: CircleAvatar(
                 backgroundColor: Colors.white,
                 child: CircleAvatar(
