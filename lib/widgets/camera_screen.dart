@@ -8,16 +8,16 @@ import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
 import 'package:image_picker/image_picker.dart';
 
-class CameraUtils extends StatefulWidget {
-  const CameraUtils({key, required this.cameras, required this.file_callback});
+class CameraScreen extends StatefulWidget {
+  const CameraScreen({key, required this.cameras, required this.file_callback});
   final ValueGetter file_callback;
   final List<CameraDescription> cameras;
 
   @override
-  State<CameraUtils> createState() => _CameraUtilsState();
+  State<CameraScreen> createState() => _CameraScreenState();
 }
 
-class _CameraUtilsState extends State<CameraUtils> {
+class _CameraScreenState extends State<CameraScreen> {
   late CameraController _cameraController;
   late Future<void> _initializeControllerFuture;
   bool _isRearCameraSelected = true;
