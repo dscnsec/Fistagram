@@ -89,10 +89,8 @@ class _PostBoxState extends State<PostBox> {
               width: 25,
               child: IconButton(
                 onPressed: () {},
-                icon: const Icon(
-                  CustomIcons.bi_heart,
-                ),
-                iconSize: 20,
+                icon: const Icon(Icons.favorite, color: Colors.redAccent),
+                iconSize: 26,
                 padding: EdgeInsets.zero,
               ),
             ),
