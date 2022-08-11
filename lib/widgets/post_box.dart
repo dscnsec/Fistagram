@@ -61,7 +61,18 @@ class _PostBoxState extends State<PostBox> {
                 child: IconButton(
                     padding: EdgeInsets.zero,
                     iconSize: 30,
-                    onPressed: () {},
+                    onPressed: () {
+                      debugPrint("Pressed post menu");
+                      PopupMenuButton(
+                          itemBuilder: (context) => ['Delete']
+                              .map((e) => PopupMenuItem(
+                                    child: Text(e),
+                                    onTap: () {},
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 11, horizontal: 16),
+                                  ))
+                              .toList());
+                    },
                     icon: const Icon(Icons.more_vert, color: primaryColor)),
               )
             ],
