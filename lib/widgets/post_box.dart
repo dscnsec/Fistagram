@@ -56,25 +56,16 @@ class _PostBoxState extends State<PostBox> {
                           fontSize: 18, fontWeight: FontWeight.w300))
                 ],
               )),
-              SizedBox(
-                width: 25,
-                child: IconButton(
-                    padding: EdgeInsets.zero,
-                    iconSize: 30,
-                    onPressed: () {
-                      debugPrint("Pressed post menu");
-                      PopupMenuButton(
-                          itemBuilder: (context) => ['Delete']
-                              .map((e) => PopupMenuItem(
-                                    child: Text(e),
-                                    onTap: () {},
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 11, horizontal: 16),
-                                  ))
-                              .toList());
-                    },
-                    icon: const Icon(Icons.more_vert, color: primaryColor)),
-              )
+              PopupMenuButton(
+                iconSize: 30,
+                icon: const Icon(Icons.more_vert, color: primaryColor),
+                itemBuilder: (context) => ['Delete']
+                    .map((e) => PopupMenuItem(
+                          child: Text(e),
+                          onTap: () {},
+                        ))
+                    .toList(),
+              ),
             ],
           ),
         ),
