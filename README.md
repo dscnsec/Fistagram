@@ -1,4 +1,4 @@
-# Fistagram  | Open For HacktoberFest [Contributions](#✨-how-to-contribute)
+# Fistagram  | Open For HacktoberFest [Contributions](#-how-to-contribute-)
 
 An Instagram clone Re-Imagined with a new UI design
 
